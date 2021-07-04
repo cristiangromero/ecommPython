@@ -30,11 +30,8 @@ def searchresult(request):
         result = Productos.objects.filter(nombre__icontains = dato)
         return render (request, "searchresult.html", {'result':result})
 
-def login(request):
-    return render (request, "login.html")
-
 def register(request):
-    return render (request, "register.html")
+    return render (request, "registration/register.html")
 
 def cart(request):
     return render (request, "cart.html")
