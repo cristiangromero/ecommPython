@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+    <strong>Atención!</strong> Usuario y/o clave incorrecta.
+</div>
+{% endif %}
+{% if next %}
+    {% if user.is_authenticated %}
+    <div class="alert alert-warning" role="alert">
+        <strong>Atención!</strong> El usuario no tiene acceso a esta página.
+    </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            <strong>Atención!</strong> Debe iniciar sesión para acceder a esta página.
+        </div>
+    {% endif %}
+{% endif %}
+<div class="login">
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <h3>Login</h3>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="key">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    {{ form.username }}
+                    <div class="clearfix"></div>
+                </div>
+                <div class="key">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    {{ form.password }}
+                    <div class="clearfix"></div>
+                </div>
+                <input type="submit" value="Login">
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+        <div class="forg">
+            <a href="{% url 'password_reset' %}" class="forg-left">Olvidó su contraseña</a>
+            <a href="registered.html" class="forg-right">Registrarse</a>
+        <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

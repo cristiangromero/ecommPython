@@ -69,10 +69,15 @@
 					<!--	<a href="#"> Ayuda  <i class="glyphicon glyphicon-phone" aria-hidden="true"></i> +0123-456-789</a> -->
 					</div>
 					<div class="top-right">
-						<ul>						
-							<li><a href="{% url 'login' %}">Login</a></li>
-							<li><a href="{% url 'register' %}"> Registro </a></li>
+						<ul>							
+							{% if user.is_authenticated %}
+							<li>Usuario: {{ user.get_username }}</li>
+							<li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
 							<li><a href="{% url 'cart' %}">Carrito</a></li>
+						  	{% else %}
+						  	<li><a href="{% url 'login' %}">Login</a></li>
+						  	<li><a href="{% url 'register' %}"> Registro </a></li>
+						  	{% endif %} 
 						</ul>
 					</div>
 					<div class="clearfix"></div>
@@ -89,7 +94,7 @@
 								<!-- Brand and toggle get grouped for better mobile display -->
 								<div class="navbar-header nav_2">
 									<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-										<span class="sr-only">Toggle navigation</span>
+										<span class="sr-only">Desplegar menú</span>
 										<span class="icon-bar"></span>
 										<span class="icon-bar"></span>
 										<span class="icon-bar"></span>
@@ -103,26 +108,23 @@
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorías<b class="caret"></b></a>
 											<ul class="dropdown-menu multi-column columns-3">
 												<div class="row">
-													<div class="col-sm-3  multi-gd-img">												
+													<div class="col-sm-6  multi-gd-img">												
 														<ul class="multi-column-dropdown">
 															<h6>Elija una categoría</h6>
 															{% for link in link_menu %}
-																<li><a href="{% url 'searchresult' %}{{ link.id }}">{{ link.nombre }}</a></li>
+																<li><a href="{% url 'listcategorias' %}?Search={{ link.id }}">{{ link.nombre }}</a></li>
 															{% endfor %}
 														</ul>
-													</div>
-												<!--	<div class="col-sm-3  multi-gd-img">
-														<a href="products.html"><img src="{% static 'images/woo.jpg' %}" alt=" "/></a>
-													</div> 
-													<div class="col-sm-3  multi-gd-img">
-														<a href="products.html"><img src="{% static 'images/woo1.jpg' %}" alt=" "/></a>
-													</div> -->
+													</div>											
 													<div class="clearfix"></div>
 												</div>
 											</ul>
 										</li>								
 										<li><a href="{% url 'aboutus' %}">Acerca de ...</a></li>
 										<li><a href="mailto:contacto@jaguaretekaa.com">Contacto</a></li>
+										{% if perms.catalog.can_mark_returned %}
+											<li><a href="{% url 'aboutus' %}">Nuevo Producto</a></li>
+										{% endif %}
 									</ul>
 								</div>
 							</nav>

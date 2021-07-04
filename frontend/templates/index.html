@@ -3,67 +3,76 @@
 {% block content %}
 <!--banner-->
 <div class="banner-w3">
-    <div class="demo-1">            
+    <div class="demo-1">
         <div id="example1" class="core-slider core-slider__carousel example_1">
             <div class="core-slider_viewport">
                 <div class="core-slider_list">
                     {% for producto in lprod %}
-                        <div class="core-slider_item ban-top">
-                            <a href="{% url 'productos' producto.id %}">                                                                                   
-                                <img src="{% static 'images/' %}{{ producto.banner }}" class="img-responsive" alt="">                               
-                            </a>
-                        </div>                        
+                    <div class="core-slider_item ban-top">
+                        <a href="{% url 'productos' producto.id %}">
+                            <img src="{% static 'images/' %}{{ producto.banner }}" class="img-responsive" alt="">
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
             <div class="core-slider_nav">
                 <div class="core-slider_arrow core-slider_arrow__right"></div>
-                    <div class="core-slider_arrow core-slider_arrow__left"></div>
-                </div>
-                <div class="core-slider_control-nav"></div>
+                <div class="core-slider_arrow core-slider_arrow__left"></div>
             </div>
+            <div class="core-slider_control-nav"></div>
         </div>
-        <link href="{% static 'css/coreSlider.css' %}" rel="stylesheet" type="text/css">
-        <script src="{% static 'js/coreSlider.js' %}"></script>
-        <script>
-            $('#example1').coreSlider({
-                pauseOnHover: false,
-                  interval: 3000,
-                  controlNavEnabled: true
-            });
-        </script>
     </div>
-</div>	
+    <link href="{% static 'css/coreSlider.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'js/coreSlider.js' %}"></script>
+    <script>
+        $('#example1').coreSlider({
+            pauseOnHover: false,
+            interval: 3000,
+            controlNavEnabled: true
+        });
+    </script>
+</div>
 <!--banner-->
-<div class="new-arrivals-w3agile">
+<div class="products-agileinfo">
+    <h2 class="tittle">Novedades</h2>
     <div class="container">
-        <h3 class="tittle1">Novedades</h3>
-        <div class="arrivals-grids">
-            {% for producto in link_prod %}
-            <div class="col-md-3 arrival-grid simpleCart_shelfItem">
-                <div class="grid-arr">
-                    <div  class="grid-arrival">
-                        <figure>		
-                            <a href="{% url 'productos' producto.id %}">
-                                <div class="grid-img">
-                                    <img  src="{% static 'images/p28.jpg' %}" class="img-responsive" alt="">
+        <div class="product-agileinfo-grids w3l">
+            <div class="bs-example bs-example-tabs col-md-9 product-agileinfon-grid1" role="tabpanel" data-example-id="togglable-tabs">
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="profile" aria-labelledby="profile-tab">
+                        {% for producto in link_prod %}
+                        <div class="{% if forloop.counter0|divisibleby:2 %}product-tab1{% else %}product-tab1 prod3{% endif %}">
+                            <div class="col-md-4 product-tab1-grid">
+                                <div class="grid-arr">
+                                    <div class="grid-arrival">
+                                        <figure>
+                                            <a href="{% url 'productos' producto.id %}">
+                                                <div class="grid-img">
+                                                    <img src="{% static 'images/p28.jpg' %}" class="img-responsive" alt="">
+                                                </div>
+                                            </a>
+                                        </figure>
+                                    </div>
+                                    <div class="ribben">
+                                        <p>Nuevo</p>
+                                    </div>
                                 </div>
-                            </a>		
-                        </figure>	
-                    </div>
-                    <div class="ribben">
-                        <p>Nuevo</p>
-                    </div>                   
-                    <div class="women">
-                        <h6 style=" text-transform: capitalize"><a href="single.html">{{ producto.nombre }}</a></h6>
-                        <span class="size" style=" text-transform: capitalize">{{ producto.descripcion|truncatechars:30 }}</span>
-                        <p ><em class="item_price">$ {{ producto.precio }}</em></p>
-                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                            </div>
+                            <div class="col-md-8 product-tab1-grid1 simpleCart_shelfItem">
+                                <div class="women">
+                                    <h6 style=" text-transform: capitalize"><a href="{% url 'productos' producto.id %}">{{ producto.nombre }}</a></h6>
+                                    <p>{{ producto.descripcion }}</p>
+                                    <p><em class="item_price">$ {{ producto.precio }}</em></p>
+                                    <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-            </div>           
-            {% endfor %}
-            <div class="clearfix"></div>
+            </div>
         </div>
     </div>
 </div>

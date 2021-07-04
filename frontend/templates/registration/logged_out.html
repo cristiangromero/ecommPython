@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+<div class="alert alert-success" role="alert">
+    <strong>Atención!</strong> Se ha desconectado del sitio.
+</div>
+<div class="login">
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <a href="{% url 'login'%}">Click aqui para volver a acceder.</a>            
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

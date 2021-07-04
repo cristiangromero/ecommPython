@@ -1,8 +1,0 @@
-{% block opcionesmenu %}
-<ul class="multi-column-dropdown">
-    <h6>Elija una categoría</h6>
-    {% for categoria in categoriass %}
-        <li><a href="{% url 'searchresult' %}">{{ categoria.nombre }}</a></li>
-    {% endfor %}
-</ul>
-{% endblock opcionesmenu %}

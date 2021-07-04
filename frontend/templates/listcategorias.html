@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+<div class="new-arrivals-w3agile">
+    <div class="container">
+        {% for categoria in cate %}
+        <h3 class="tittle1" style=" text-transform: capitalize">{{ categoria.nombre }}</h3>
+        {% endfor %}
+        <div class="arrivals-grids">
+            {% for producto in prodcat %}
+            <div class="col-md-3 arrival-grid simpleCart_shelfItem">
+                <div class="grid-arr">
+                    <div  class="grid-arrival">
+                        <figure>		
+                            <a href="{% url 'productos' producto.id %}">
+                                <div class="grid-img">
+                                    <img  src="{% static 'images/p28.jpg' %}" class="img-responsive" alt="">
+                                </div>
+                            </a>		
+                        </figure>	
+                    </div>                                    
+                    <div class="women">
+                        <h6 style=" text-transform: capitalize"><a href="single.html">{{ producto.nombre }}</a></h6>
+                        <span class="size" style=" text-transform: capitalize">{{ producto.descripcion|truncatechars:30 }}</span>
+                        <p ><em class="item_price">$ {{ producto.precio }}</em></p>
+                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                    </div>
+                </div>
+            </div>           
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
