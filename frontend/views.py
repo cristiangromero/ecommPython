@@ -17,7 +17,8 @@ def register(request):
     
 def productos(request, prod_id):
     productoss = Productos.objects.get(id = prod_id)
-    return render (request, "productos.html", {'productoss':productoss})
+    categ = Categorias.objects.get(nombre = productoss.categoria)
+    return render (request, "productos.html", {'productoss':productoss, 'categ':categ})
 
 def listcategorias(request):
     cat_id = request.GET.get("Search")
