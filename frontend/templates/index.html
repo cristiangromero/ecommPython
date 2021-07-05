@@ -64,7 +64,9 @@
                                     <h6 style=" text-transform: capitalize"><a href="{% url 'productos' producto.id %}">{{ producto.nombre }}</a></h6>
                                     <p>{{ producto.descripcion }}</p>
                                     <p><em class="item_price">$ {{ producto.precio }}</em></p>
-                                    <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                                    {% if user in users_in_group %}
+                                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="clearfix"></div>

@@ -21,7 +21,9 @@
                         <h6 style=" text-transform: capitalize"><a href="single.html">{{ producto.nombre }}</a></h6>
                         <span class="size" style=" text-transform: capitalize">{{ producto.descripcion|truncatechars:30 }}</span>
                         <p ><em class="item_price">$ {{ producto.precio }}</em></p>
-                        <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                        {% if user in users_in_group %}
+                            <a href="#" data-text="Add To Cart" class="my-cart-b item_add">Agregar al carrito</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>           

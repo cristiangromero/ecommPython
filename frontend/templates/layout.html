@@ -71,12 +71,14 @@
 					<div class="top-right">
 						<ul>							
 							{% if user.is_authenticated %}
-							<li>Usuario: {{ user.get_username }}</li>
-							<li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
-							<li><a href="{% url 'cart' %}">Carrito</a></li>
+								<li>Usuario: {{ user.get_username }}</li>
+								<li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>								
+								{% if user in users_in_group %}
+									<li><a href="{% url 'cart' %}">Carrito</a></li>
+								{% endif %}
 						  	{% else %}
-						  	<li><a href="{% url 'login' %}">Login</a></li>
-						  	<li><a href="{% url 'register' %}"> Registro </a></li>
+						  		<li><a href="{% url 'login' %}">Login</a></li>
+						  		<li><a href="{% url 'register' %}"> Registro </a></li>
 						  	{% endif %} 
 						</ul>
 					</div>
@@ -134,25 +136,26 @@
 								<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
 							</ul> <!-- cd-header-buttons -->
 							<div id="cd-search" class="cd-search">
-								<form action="{% url 'searchresult' %}" method="GET">
-								<!--	{% csrf_token %} -->
+								<form action="{% url 'searchresult' %}" method="GET">								
 									<input name="Search" type="search" placeholder="Buscar...">
 								</form>
 							</div>	
 						</div>
 						<div class="header-right2">
-							<div class="cart box_1">
-								<a href="{% url 'cart' %}">
-									<h3> 
-										<div class="total">
-											<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-										</div>
-										<img src="{% static 'images/bag.png' %}" alt="" />
-									</h3>
-								</a>
-								<p><a href="javascript:;" class="simpleCart_empty">Vaciar carrito</a></p>
-								<div class="clearfix"> </div>
-							</div>	
+							{% if user in users_in_group %}
+								<div class="cart box_1">
+									<a href="{% url 'cart' %}">
+										<h3> 
+											<div class="total">
+												<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+											</div>
+											<img src="{% static 'images/bag.png' %}" alt="" />
+										</h3>
+									</a>
+									<p><a href="javascript:;" class="simpleCart_empty">Vaciar carrito</a></p>
+									<div class="clearfix"> </div>
+								</div>
+							{% endif %}	
 						</div>
 							<div class="clearfix"> </div>
 						</div>

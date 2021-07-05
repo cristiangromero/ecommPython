@@ -1,7 +1,9 @@
-from django.http.response import HttpResponseRedirect, JsonResponse
+from django.contrib.auth.models import Group
+from django.urls import reverse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from .models import *
-from django.core import serializers
+from .forms import RegistroForm
 
 # Create your views here.
 def index(request):
@@ -10,6 +12,9 @@ def index(request):
 def aboutus(request):
     return render (request, "aboutus.html")
 
+def register(request):
+    return render(request, "register.html")
+    
 def productos(request, prod_id):
     productoss = Productos.objects.get(id = prod_id)
     return render (request, "productos.html", {'productoss':productoss})
@@ -30,8 +35,19 @@ def searchresult(request):
         result = Productos.objects.filter(nombre__icontains = dato)
         return render (request, "searchresult.html", {'result':result})
 
-def register(request):
-    return render (request, "registration/register.html")
-
 def cart(request):
     return render (request, "cart.html")
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = form.save() 
+            group = Group.objects.get(name='Clientes')
+            user.groups.add(group)         
+            return HttpResponseRedirect(reverse('login'))
+    else:
+        form = RegistroForm()
+    return render(request, 'registration/register.html', {
+        'form': form
+        })
