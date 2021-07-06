@@ -1,3 +1,5 @@
+from django.forms.widgets import Widget
+from .models import Categorias, Productos
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -16,3 +18,17 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2', )
+
+class UploadImageForm(forms.ModelForm):
+    nombre= forms.CharField(
+         label='Nombre', widget=forms.TextInput(attrs={'name': 'name', 'placeholder':'Nombre'}), max_length=150, required=True)
+    descripcion= forms.CharField(
+        label='Descrip', widget=forms.Textarea(attrs={'name': 'descripcion', 'placeholder':'Descripción'}), required=True)
+    categoria= forms.ModelChoiceField(queryset=Categorias.objects.all(),  label='Categoría')
+    precio= forms.DecimalField(label='Precio', decimal_places=2, max_digits=15)
+    foto= forms.ImageField(label='Foto',required=False, error_messages = {'invalid':"Sólo se admiten imágenes"}, widget=forms.FileInput)
+    banner= forms.ImageField(label='Banner',required=False, error_messages = {'invalid':"Sólo se admiten imágenes"}, widget=forms.FileInput)
+
+    class Meta:
+        model = Productos
+        fields = ['foto', 'banner','nombre', 'descripcion', 'categoria','precio']

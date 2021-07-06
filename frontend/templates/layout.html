@@ -124,8 +124,8 @@
 										</li>								
 										<li><a href="{% url 'aboutus' %}">Acerca de ...</a></li>
 										<li><a href="mailto:contacto@jaguaretekaa.com">Contacto</a></li>
-										{% if perms.catalog.can_mark_returned %}
-											<li><a href="{% url 'aboutus' %}">Nuevo Producto</a></li>
+										{% if user not in users_in_group %}
+											<li><a href="{% url 'newprod' %}">Nuevo Producto</a></li>
 										{% endif %}
 									</ul>
 								</div>

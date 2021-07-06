@@ -15,3 +15,4 @@ def last_prod(request):
 def grupo(request):
     users_in_group = Group.objects.get(name="Clientes").user_set.all()
     return { 'users_in_group': users_in_group }
+

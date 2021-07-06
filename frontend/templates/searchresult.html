@@ -12,13 +12,13 @@
                         <figure>		
                             <a href="{% url 'productos' producto.id %}">
                                 <div class="grid-img">
-                                    <img  src="{% static 'images/p28.jpg' %}" class="img-responsive" alt="">
+                                    <img  src="{% static 'images/' %}{{ producto.foto }}" class="img-responsive" alt="">
                                 </div>
                             </a>		
                         </figure>	
                     </div>                                    
                     <div class="women">
-                        <h6 style=" text-transform: capitalize"><a href="single.html">{{ producto.nombre }}</a></h6>
+                        <h6 style=" text-transform: capitalize"><a href="{% url 'productos' %}">{{ producto.nombre }}</a></h6>
                         <span class="size" style=" text-transform: capitalize">{{ producto.descripcion|truncatechars:30 }}</span>
                         <p ><em class="item_price">$ {{ producto.precio }}</em></p>
                         {% if user in users_in_group %}

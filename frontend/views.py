@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from .models import *
-from .forms import RegistroForm
+from .forms import RegistroForm, UploadImageForm
 
 # Create your views here.
 def index(request):
@@ -33,7 +33,7 @@ def categorias(request):
 def searchresult(request):
     if request.method == 'GET':
         dato = request.GET.get("Search")
-        result = Productos.objects.filter(nombre__icontains = dato)
+        result = Productos.objects.raw(nombre__icontains = dato)
         return render (request, "searchresult.html", {'result':result})
 
 def cart(request):
@@ -50,5 +50,17 @@ def register(request):
     else:
         form = RegistroForm()
     return render(request, 'registration/register.html', {
+        'form': form
+        })
+
+def newprod(request):
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST)
+        if form.is_valid():
+            form.save()   
+            return HttpResponseRedirect(reverse('newprod'))
+    else:
+        form = UploadImageForm()
+    return render(request, 'newprod.html', {
         'form': form
         })
