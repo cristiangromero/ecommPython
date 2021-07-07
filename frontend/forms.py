@@ -21,11 +21,12 @@ class RegistroForm(UserCreationForm):
 
 class UploadImageForm(forms.ModelForm):
     nombre= forms.CharField(
-         label='Nombre', widget=forms.TextInput(attrs={'name': 'name', 'placeholder':'Nombre'}), max_length=150, required=True)
+         label='Nombre', widget=forms.TextInput(attrs={'name': 'nombre', 'placeholder':'Nombre', 'class':'formu'}), max_length=150, required=True)
     descripcion= forms.CharField(
-        label='Descrip', widget=forms.Textarea(attrs={'name': 'descripcion', 'placeholder':'Descripción'}), required=True)
-    categoria= forms.ModelChoiceField(queryset=Categorias.objects.all(),  label='Categoría')
-    precio= forms.DecimalField(label='Precio', decimal_places=2, max_digits=15)
+        label='Descrip', widget=forms.Textarea(attrs={'name': 'descripcion', 'placeholder':'Descripción', 'class':'formu'}), required=True)
+    categoria= forms.ModelChoiceField(queryset=Categorias.objects.all(),  label='Categoría',empty_label='Categoría',widget=forms.Select(attrs={'class':'formu'}))
+    precio= forms.DecimalField(
+        label='Precio', widget = forms.NumberInput(attrs={'name': 'precio', 'placeholder':'Precio', 'class':'formu'}), decimal_places=2, max_digits=15, required=True)
     foto= forms.ImageField(label='Foto',required=False, error_messages = {'invalid':"Sólo se admiten imágenes"}, widget=forms.FileInput)
     banner= forms.ImageField(label='Banner',required=False, error_messages = {'invalid':"Sólo se admiten imágenes"}, widget=forms.FileInput)
 

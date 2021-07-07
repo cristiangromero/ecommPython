@@ -13,8 +13,8 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=200)
     precio = models.DecimalField(max_digits=11, decimal_places=2)
     descripcion = models.TextField()
-    foto = models.ImageField(upload_to='images/')
-    banner = models.ImageField(upload_to='images/')
+    foto = models.ImageField(upload_to='fotos')
+    banner = models.ImageField(upload_to='banners')
     fecha = models.DateTimeField(auto_now_add=True)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     def __str__(self):

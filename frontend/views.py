@@ -55,12 +55,10 @@ def register(request):
 
 def newprod(request):
     if request.method == 'POST':
-        form = UploadImageForm(request.POST)
+        form = UploadImageForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()   
+            form.save()
             return HttpResponseRedirect(reverse('newprod'))
     else:
         form = UploadImageForm()
-    return render(request, 'newprod.html', {
-        'form': form
-        })
+    return render(request, 'newprod.html', {'form': form})

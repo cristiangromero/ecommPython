@@ -7,42 +7,41 @@
 </div>
 {% endif %}
 <!--single-->
+<style>
+    .formu {
+        width: 100%;
+        resize: none;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 <div class="single-wl3">
 	<div class="container">
 		<div class="single-grids">
 			<div class="col-md-9 single-grid form-w3agile form1">
 				<div clas="single-top">
-                    <form method="post">
+                    <form enctype="multipart/form-data" method="post">
                         {% csrf_token %}
-					    <div class="single-left key">
+					    <div class="single-left">
 					        <div class="flexslider">							
 					            <div class="thumb-image"> 
                                     {% for campo in form %}   
                                         {% if campo.label == 'Foto' or campo.label == 'Banner' %}
-                                            {{ campo.label }} {{ campo }}
+                                         <div>{{ campo.label }}</div>
+                                         <div>{{ campo }}</div>
                                         {% endif %}
                                     {% endfor %}	    
 					            </div> 
                             </div>
                         </div>                      		
 					    <div class="single-right simpleCart_shelfItem">
-                            {% for campo in form %} 
-                                {% if campo.label == 'Descrip'%}
-                                    <div class="description">
-                                        {{ campo }}                                       
+                            {% for campo in form %}                                 
+                                {% if campo.label == 'Nombre' or campo.label == 'Descrip' or campo.label == 'Precio' or campo.label == 'Categoría'%}                                   
+                                    <div style="text-align: right;" class="key">  
+                                        {{ campo }}
                                         <div class="clearfix"></div>
-                                    </div>
-                                {% elif campo.label == 'Nombre' %}
-                                    <div class="key">
-                                        {{ campo }}  
-                                        <div class="clearfix"></div>
-                                    </div>   
-                                {% elif campo.label == 'Precio' or campo.label == 'Categoría' %}
-                                    <div class="key">
-                                       {{ campo }}{{campo.label}} 
-                                        <div class="clearfix"></div>
-                                    </div>
-                                {% endif %}                                   
+                                    </div>                                              
+                                {% endif %}                                                                  
                             {% endfor %}
                             <input type="submit" value="Guardar">
                         </div>
