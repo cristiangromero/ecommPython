@@ -33,7 +33,7 @@ def categorias(request):
 def searchresult(request):
     if request.method == 'GET':
         dato = request.GET.get("Search")
-        result = Productos.objects.raw(nombre__icontains = dato)
+        result = Productos.objects.filter(nombre__icontains=dato)
         return render (request, "searchresult.html", {'result':result})
 
 def cart(request):

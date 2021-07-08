@@ -18,7 +18,7 @@
                         </figure>	
                     </div>                                    
                     <div class="women">
-                        <h6 style=" text-transform: capitalize"><a href="{% url 'productos' %}">{{ producto.nombre }}</a></h6>
+                        <h6 style=" text-transform: capitalize"><a href="{% url 'productos' producto.id %}">{{ producto.nombre }}</a></h6>
                         <span class="size" style=" text-transform: capitalize">{{ producto.descripcion|truncatechars:30 }}</span>
                         <p ><em class="item_price">$ {{ producto.precio }}</em></p>
                         {% if user in users_in_group %}
