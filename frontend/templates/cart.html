@@ -5,17 +5,17 @@
     <div class="cart-items">
         <div class="container">
             <h2>Mi carrito</h2>
+            {% for producto in link_prod %}
             <script>$(document).ready(function(c) {
-                $('.close1').on('click', function(c){
-                    $('.cart-header').fadeOut('slow', function(c){
-                        $('.cart-header').remove();
+                $('.close{{forloop.counter}}').on('click', function(c){
+                    $('.cart-header{% if forloop.counter > 1 %}{{forloop.counter}}{% endif %}').fadeOut('slow', function(c){
+                        $('.cart-header{% if forloop.counter > 1 %}{{forloop.counter}}{% endif %}').remove();
                         });
                     });
                 });
             </script>            
-            {% for producto in link_prod %}
-            <div class="cart-header">
-                <div class="close1"> </div>
+            <div class="cart-header{% if forloop.counter > 1 %}{{forloop.counter}}{% endif %}">
+                <div class="close{{forloop.counter}}"> </div>
                 <div class="cart-sec simpleCart_shelfItem">
                     <div class="cart-item cyc">
                         <img src="{% static 'images/' %}{{ producto.foto }}" class="img-responsive" alt="">
@@ -30,7 +30,7 @@
                     <div class="clearfix"></div>                        
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 {% endblock %}

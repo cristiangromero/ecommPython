@@ -24,7 +24,8 @@ class Productos(models.Model):
 
 class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usuario")
-    productos = models.ManyToManyField(Productos)
+    producto =  models.ForeignKey(Productos, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     def __str__(self):
         return self.productos
