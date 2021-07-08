@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 {% if form.errors %}
-<div class="alert alert-danger" role="alert">
-    <strong>Atención!</strong> Revise los datos cargados y vuelva a intentar.
-</div>
+    <div class="alert alert-danger" role="alert">
+        <strong>Atención!</strong> Revise los datos cargados y vuelva a intentar.
+    </div>
 {% endif %}
 <!--single-->
 <style>
@@ -44,6 +44,7 @@
                                 {% endif %}                                                                  
                             {% endfor %}
                             <input type="submit" value="Guardar">
+                            <input type="hidden" name="next" value="{{ next }}" />
                         </div>
                     </form>													
 				</div>

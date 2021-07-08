@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+	<!--content-->
+    <div class="cart-items">
+        <div class="container">
+            <h2>Mi carrito</h2>
+            <script>$(document).ready(function(c) {
+                $('.close1').on('click', function(c){
+                    $('.cart-header').fadeOut('slow', function(c){
+                        $('.cart-header').remove();
+                        });
+                    });
+                });
+            </script>            
+            {% for producto in link_prod %}
+            <div class="cart-header">
+                <div class="close1"> </div>
+                <div class="cart-sec simpleCart_shelfItem">
+                    <div class="cart-item cyc">
+                        <img src="{% static 'images/' %}{{ producto.foto }}" class="img-responsive" alt="">
+                    </div>
+                    <div class="cart-item-info">
+                        <h3><a href="#"> {{ producto.nombre }} </a></h3>
+                        <ul class="qty">
+                            <li><p>{{ producto.precio }}</p></li>
+                            <li><p>{{ producto.descripcion }}</p></li>
+                        </ul>	
+                    </div>
+                    <div class="clearfix"></div>                        
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
